@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import moment from 'moment';
 import classNames from 'classnames/bind';
 
-import {MONTHS, WEEKS} from '../constants';
+import {MONTHS} from '../constants';
 import {chunk} from '../utils';
 
 
