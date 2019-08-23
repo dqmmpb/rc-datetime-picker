@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import moment from 'moment';
 import classNames from 'classnames/bind';
 
-import {MONTHS} from '../constants';
+import {MONTHS, WEEKS} from '../constants';
 import {chunk} from '../utils';
 
 
@@ -46,19 +46,19 @@ class Month extends Component {
     const _moment = this.state.moment;
     const {maxDate, minDate, months, selected, range, rangeAt, dateLimit} = this.props;
     const currentMonth = _moment.clone().month(month);
-    const start = selected && range 
-      ? (selected.start ? currentMonth.isSame(selected.start, 'month') : false) 
-      : false; 
-    const end = selected && range
-      ? (selected.end ? currentMonth.isSame(selected.end, 'month') : false) 
-      : false; 
-    const between = selected && range 
-      ? (selected.start && selected.end 
-        ? currentMonth.isBetween(selected.start, selected.end, 'month') 
-        : false) 
+    const start = selected && range
+      ? (selected.start ? currentMonth.isSame(selected.start, 'month') : false)
       : false;
-    const isSelected = selected 
-      ? range 
+    const end = selected && range
+      ? (selected.end ? currentMonth.isSame(selected.end, 'month') : false)
+      : false;
+    const between = selected && range
+      ? (selected.start && selected.end
+        ? currentMonth.isBetween(selected.start, selected.end, 'month')
+        : false)
+      : false;
+    const isSelected = selected
+      ? range
         ? selected[rangeAt] ? currentMonth.isSame(selected[rangeAt], 'month') : false
         : currentMonth.isSame(selected, 'day')
       : false;
@@ -107,9 +107,9 @@ class Month extends Component {
     });
 
     return (
-      <td 
-        key={month} 
-        className={className} 
+      <td
+        key={month}
+        className={className}
         onClick={this.select.bind(this, month, isDisabled)}>
         {months ? months[idx + row * 3] : month}
       </td>
@@ -118,8 +118,7 @@ class Month extends Component {
 
   render() {
     const _moment = this.state.moment;
-    const months = MONTHS;
-    const {changePanel, style} = this.props;
+    const {months = MONTHS, changePanel, style} = this.props;
 
     return (
       <div className="calendar-months" style={style}>
